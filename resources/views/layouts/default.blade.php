@@ -6,7 +6,9 @@
   <title>@yield('title')</title>
 
   <!-- STYLE -->
+  @stack('prepend-style')
   @include('includes.style')
+  @stack('addon-style')
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -34,7 +36,8 @@
 <!-- ./wrapper -->
 
 <!-- jQuery -->
-
+@stack('prepend-script')
 @include('includes.script')
+@stack('addon-script')
 </body>
 </html>

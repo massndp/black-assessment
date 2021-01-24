@@ -7,7 +7,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Produk</h1>
+            <h1 class="m-0">Transaksi Pembelian</h1>
           </div><!-- /.col -->
           
         </div><!-- /.row -->
@@ -19,35 +19,40 @@
     <section class="content">
       <div class="container-fluid">
         <div class="card">
+          @if ($errors->any())
+              <div class="alert alert-danger" role="alert">
+                <button class="close" data-dismiss="alert" aria-label="close">
+                  <span aria-hidden="false">&times;</span>
+                </button>
+                <ul>
+                  @foreach ($errors->all() as $error)
+                      <li>{{$error}}</li>
+                  @endforeach
+                </ul>
+              </div>
+          @endif
             <div class="card-body">
-               <form action="{{route('product.store')}}" method="POST" enctype="multipart/form-data">
+               <form action="{{route('purchase.update', $item->id)}}" method="POST">
                 @csrf
+                @method('PUT')
                   <div class="form-group">
-                    <label for="name">Nama Produk</label>
-                    <input type="text" name="name" class="form-control" value="{{old('name')}}" required>
-                  </div>
-                  <div class="form-group">
-                    <label for="category_id">Kategori</label>
-                    <select name="category_id" id="" class="form-control select2" required>
-                      <option value="">Pilih Kategori Product</option>
-                      @foreach ($categories as $item)
+                    <label for="products_id">Edit Pembelian</label>
+                    <select name="products_id" class="form-control">
+                      <option value="">Pilih Produk</option>
+                      @foreach ($products as $item)
                           <option value="{{$item->id}}">
-                            {{$item->category}}
+                            {{$item->name}}
                           </option>
                       @endforeach
                     </select>
                   </div>
                   <div class="form-group">
-                    <label for="price">Harga Produk</label>
-                    <input type="number" name="price" class="form-control" value="{{old('price')}}" required>
+                    <label for="qty">Jumlah</label>
+                    <input type="number" name="qty" class="form-control" value="{{$item->qty}}">
                   </div>
                   <div class="form-group">
-                    <label for="qty">Jumlah Produk</label>
-                    <input type="number" name="qty" class="form-control" value="{{old('qty')}}" required>
-                  </div>
-                  <div class="form-group">
-                    <label for="photo"></label><br>
-                    <input type="file" name="photo">
+                    <label for="tanggal">Tanggal</label>
+                    <input type="date" name="tanggal" class="form-control" value="{{$item->tanggal}}">
                   </div>
                   <button class="btn btn-primary" type="submit">
                     <i class="fa fa-save"></i>
@@ -63,11 +68,3 @@
    
   </div>
 @endsection
-
-{{-- @push('prepend-style')
-
-@endpush
-
-@push('addon-script')
-
-@endpush --}}

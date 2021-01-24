@@ -19,6 +19,7 @@ Route::get('/', 'DashboardController@index')
 
 Route::resource('category', 'CategoryController');
 Route::resource('product', 'ProductController');
+Route::resource('purchase', 'PurchaseController');
 
 Auth::routes();
 

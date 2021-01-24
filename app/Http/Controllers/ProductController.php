@@ -75,11 +75,11 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $product = Product::findOrFail($id);
+        $item = Product::findOrFail($id);
         $categories = Category::all();
 
         return view('pages.product.edit',[
-            'product'=>$product,
+            'item'=>$item,
             'categories'=>$categories
         ]);
     }
@@ -98,8 +98,8 @@ class ProductController extends Controller
             'images', 'public'
         );
 
-        $product = Product::findOrFail($id);
-        $product->update($data);
+        $item = Product::findOrFail($id);
+        $item->update($data);
 
         return redirect()->route('product.index');
     }

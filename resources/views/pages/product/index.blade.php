@@ -21,7 +21,7 @@
         <div class="card">
             <div class="card-header">
                 <a href="{{route('product.create')}}" class="btn btn-primary">
-                    <i class="fa fa-plus"></i> Tambah Kategori Produk
+                    <i class="fa fa-plus"></i> Tambah Produk
                 </a>
             </div>
             <div class="card-body">
@@ -40,7 +40,8 @@
                     <tbody>
                         <?php $no = 1 ?>
                         @forelse ($products as $item)
-                            <td>{{$no}}</td>
+                            <tr>
+                                <td>{{$no}}</td>
                             <td>{{$item->name}}</td> 
                             <td>{{$item->category->category}}</td>
                             <td>{{$item->price}}</td>
@@ -60,6 +61,7 @@
                                     </button>
                                 </form>
                             </td>
+                            </tr>
                             <?php $no++ ?>
                         @empty
                             <tr>

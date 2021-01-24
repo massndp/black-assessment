@@ -20,6 +20,7 @@ Route::get('/', 'DashboardController@index')
 Route::resource('category', 'CategoryController');
 Route::resource('product', 'ProductController');
 Route::resource('purchase', 'PurchaseController');
+Route::resource('sale', 'SaleController');
 
 Auth::routes();
 

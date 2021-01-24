@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\PurchaseRequest;
+use App\Http\Requests\SaleRequest;
 use App\Product;
-use App\Purchase;
+use App\Sale;
 use Illuminate\Http\Request;
 
-class PurchaseController extends Controller
+class SaleController extends Controller
 {
     public function __construct()
     {
@@ -21,8 +21,8 @@ class PurchaseController extends Controller
      */
     public function index()
     {
-       $items = Purchase::with('product')->get();
-       return view('pages.purchase.index',[
+        $items = Sale::with('product')->get();
+       return view('pages.sale.index',[
            'items'=>$items
        ]);
     }
@@ -35,7 +35,7 @@ class PurchaseController extends Controller
     public function create()
     {
         $products = Product::all();
-        return view('pages.purchase.create',[
+        return view('pages.sale.create',[
             'products'=>$products
         ]);
     }
@@ -46,18 +46,18 @@ class PurchaseController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PurchaseRequest $request)
+    public function store(SaleRequest $request)
     {
         $data = $request->all();
         $data['uuid'] = 'TRX' . mt_rand(10000, 99999) . mt_rand(100, 999);
 
-        Purchase::create($data);
+        Sale::create($data);
 
         $product = Product::findOrFail($request->products_id);
-        $product->qty += $request->qty;
+        $product->qty -= $request->qty;
         $product->save();
 
-        return redirect()->route('purchase.index');
+        return redirect()->route('sale.index');
     }
 
     /**
@@ -79,7 +79,7 @@ class PurchaseController extends Controller
      */
     public function edit($id)
     {
-      
+        //
     }
 
     /**
@@ -89,19 +89,9 @@ class PurchaseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(PurchaseRequest $request, $id)
+    public function update(Request $request, $id)
     {
-        // $data = $request->all();
-        
-        // $item = Purchase::findOrFail($id);
-        // $item->update($data);
-        
-        // $product = Product::findOrFail($request->products_id);
-        // $product->qty = $request->qty;  
-        // $product->update();  
-
-
-        // return redirect()->route('purchase.index');
+        //
     }
 
     /**
@@ -110,12 +100,11 @@ class PurchaseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request,$id)
+    public function destroy($id)
     {
-
-        $item = Purchase::findOrFail( $id);
+        $item = Sale::findOrFail( $id);
         $item->delete();
 
-        return redirect()->route('purchase.index');
+        return redirect()->route('sale.index');
     }
 }

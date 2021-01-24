@@ -63,9 +63,9 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{route('product.index')}}" class="nav-link">
+                <a href="{{route('sale.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Produk</p>
+                  <p>Penjualan</p>
                 </a>
               </li>
             </ul>

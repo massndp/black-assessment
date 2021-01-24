@@ -22,3 +22,8 @@ Route::get('/category', 'API\CategoryApiController@index');
 Route::post('/category', 'API\CategoryApiController@create');
 Route::put('/category/{id}', 'API\CategoryApiController@edit');
 Route::delete('/category/{id}', 'API\CategoryApiController@destroy');
+
+Route::get('/product', 'API\ProductApiController@index');
+Route::post('/product', 'API\ProductApiController@create');
+Route::put('/product/{id}', 'API\ProductApiController@edit');
+Route::delete('/product/{id}', 'API\ProductApiController@destroy');
